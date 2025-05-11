@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -43,6 +42,7 @@ type StoreState = {
   toggleMenu: () => void;
   toggleWishlist: (product: Product) => void;
   login: (email: string, password: string) => Promise<boolean>;
+  register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
   getCartTotal: () => number;
   getCartCount: () => number;
@@ -170,6 +170,14 @@ const useStore = create<StoreState>()(
         } else {
           set({ cart: [...cart, { product, quantity }] });
         }
+        
+        // Auto-open cart when adding item
+        set({ isCartOpen: true });
+        
+        // Auto-close cart after a delay
+        setTimeout(() => {
+          set({ isCartOpen: false });
+        }, 3000);
       },
       
       removeFromCart: (productId) => {
@@ -235,6 +243,22 @@ const useStore = create<StoreState>()(
           return true;
         }
         return false;
+      },
+      
+      register: async (name, email, password) => {
+        // Mock registration - in a real app, this would create a user in the backend
+        // For demonstration, we'll just create a new regular user
+        set({
+          user: {
+            id: Math.floor(Math.random() * 1000) + 3, // Random ID starting from 3
+            name,
+            email,
+            isAdmin: false
+          },
+          isLoggedIn: true
+        });
+        
+        return true;
       },
       
       logout: () => set({ user: null, isLoggedIn: false }),

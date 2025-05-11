@@ -5,45 +5,13 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ProductFeatured from '@/components/products/ProductFeatured';
+import HomeBanner from '@/components/home/HomeBanner';
 
 const Index = () => {
   return (
     <MainLayout>
-      {/* Hero section */}
-      <section className="relative bg-shop-lightgray">
-        <div className="container mx-auto px-4 py-20 md:py-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-tight">
-                Modern design, <br />exceptional quality
-              </h1>
-              <p className="text-lg text-shop-gray mb-8 max-w-md">
-                Discover our curated collection of minimalist products designed to elevate your everyday experience.
-              </p>
-              <div className="flex space-x-4">
-                <Link to="/products">
-                  <Button className="bg-shop-charcoal hover:bg-black text-white">
-                    Shop Now
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link to="/about">
-                  <Button variant="outline">About Our Brand</Button>
-                </Link>
-              </div>
-            </div>
-            <div className="order-1 md:order-2">
-              <div className="aspect-w-4 aspect-h-5 bg-gray-100">
-                <img 
-                  src="https://images.unsplash.com/photo-1594968973184-9040a5a79963?q=80&w=1080&auto=format&fit=crop"
-                  alt="Minimal design showcase" 
-                  className="object-cover w-full h-full" 
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero section with carousel */}
+      <HomeBanner />
       
       {/* Categories section */}
       <section className="py-16">
