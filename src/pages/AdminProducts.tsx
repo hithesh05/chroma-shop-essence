@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import AdminLayout from '@/components/layouts/AdminLayout';
@@ -13,12 +12,26 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 
+// Define the form data type to ensure featured is required
+interface ProductFormData {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
+  rating: number;
+  reviewCount: number;
+  inStock: boolean;
+  featured: boolean;
+}
+
 const AdminProducts = () => {
   const { user, products } = useStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [showProductDialog, setShowProductDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ProductFormData>({
     id: 0,
     name: '',
     description: '',
@@ -58,7 +71,11 @@ const AdminProducts = () => {
 
   const handleEditProduct = (product: Product) => {
     setCurrentProduct(product);
-    setFormData({ ...product });
+    // Ensure featured is always defined when setting form data
+    setFormData({
+      ...product,
+      featured: product.featured || false
+    });
     setShowProductDialog(true);
   };
 
